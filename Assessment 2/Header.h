@@ -70,8 +70,15 @@ public:
 	float DotProd(Vector2 thing)
 	{
 		return (vec_x*thing.vec_x) + (vec_y*thing.vec_y);
+	}
 
-
+	float getY()
+	{
+		return vec_y;
+	}
+	float getX()
+	{
+		return vec_x;
 	}
 
 private:
@@ -220,7 +227,7 @@ class Vector4
 		float vec_y;
 		float vec_z;
 		float vec_w;
-	};
+
 
 };
 
@@ -230,25 +237,29 @@ public:
 	Matrix2() {}
 	Matrix2(float x1, float x2, float y1, float y2)
 	{
-
+		m_x1 = x1;
+		m_x2 = x2;
+		m_y1 = y1;
+		m_y2 = y2;
 	}
 
 	Matrix2 operator *(const Matrix2& mult) const
 	{
-
+		
 	}
 	
 private:
-	float x1;
-	float x2;
-	float y1;
-	float y2;
+	float m_x1;
+	float m_x2;
+	float m_y1;
+	float m_y2;
 };
 
 class Matrix3
 {
 public:
 	Matrix3() {}
+	Matrix3(float x1, float x2, float y1, float y2)
 	Matrix3//(Needs 9 floats when your not thinking like a tard.)
 	
 private:
