@@ -259,19 +259,56 @@ class Matrix3
 {
 public:
 	Matrix3() {}
-	Matrix3(float x1, float x2, float y1, float y2)
-	Matrix3//(Needs 9 floats when your not thinking like a tard.)
+	Matrix3(float x1, float x2, float x3, float y1, float y2, float y3, float z1, float z2, float z3);
+	{
+		
+
+
+	}
+	
 	
 private:
+	float m_x1;
+	float m_x2;
+	float m_x3;
 
+	float m_y1;
+	float m_y2;
+	float m_y3;
+
+	float m_z1;
+	float m_y2;
+	float m_y3;
+
+	float m_z1;
+	float m_z2;
+	float m_z3;
 };
 
 class Matrix4
 {
 public:
 	Matrix4() {}
-	Matrix4//(Needs 16 floats when your not thinking like a tard.)
+	Matrix4(float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4, float z1, float z2, float z3, float z4, float w1, float w2, float w3, float w4);
 
 private:
+	float m_x1;
+	float m_x2;
+	float m_x3;
+	float m_x4;
 
+	float m_y1;
+	float m_y2;
+	float m_y3;
+	float m_y4;
+
+	float m_z1;
+	float m_y2;
+	float m_y3;
+	float m_y4;
+
+	float m_z1;
+	float m_z2;
+	float m_z3;
+	float m_z4;
 };
