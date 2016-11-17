@@ -13,6 +13,7 @@ public:
 		vec_x = xx;
 		vec_y = yy;
 	}
+	
 
 	void Add(Vector2 var)
 	{
@@ -80,6 +81,10 @@ public:
 	{
 		return vec_x;
 	}
+
+
+
+
 
 private:
 	float vec_x;
@@ -243,9 +248,29 @@ public:
 		m_y2 = y2;
 	}
 
+	Vector2 operator*(Vector2 &vec2)const
+	{
+		Vector2 car = Vector2 ( 
+			
+			
+			((vec2.getX() * vec2.getX()) + (vec2.getY() * vec2.getX()) ), //X 
+			((vec2.getY() * vec2.getX()) + (vec2.getY() * vec2.getY()) )  //Y 
+		); 
+
+
+
+		return car;
+	}
+
 	Matrix2 operator *(const Matrix2& mult) const
 	{
-		
+		Matrix2 Matt2;
+		Matt2.m_x1 = (m_x1 * mult.m_x1) + (m_x2 * mult.m_y1);
+		Matt2.m_x2 = (m_x1 * mult.m_x2) + (m_x2 * mult.m_y2);
+		Matt2.m_y1 = (m_y1 * mult.m_x1) + (m_y2 * mult.m_y1);
+		Matt2.m_y2 = (m_y1 * mult.m_x2) + (m_y2 * mult.m_y2);
+
+			return Matt2;
 	}
 	
 private:
@@ -259,13 +284,35 @@ class Matrix3
 {
 public:
 	Matrix3() {}
-	Matrix3(float x1, float x2, float x3, float y1, float y2, float y3, float z1, float z2, float z3);
+	Matrix3(float x1, float x2, float x3, float y1, float y2, float y3, float z1, float z2, float z3)
 	{
-		
+		m_x1 = x1;
+		m_x2 = x2;
+		m_x3 = x3;
 
+		m_y1 = y1;
+		m_y2 = y2;
+		m_y3 = y3;
 
+		m_z1 = z1;
+		m_z2 = z2;
+		m_z3 = z3;
 	}
-	
+	Matrix3 operator *(const Matrix3& mult) const
+	{
+		Matrix3 bank;
+		bank.m_x1 = (m_x1 * mult.m_x1) + (m_x2 * mult.m_y1) + (m_x3 * mult.m_z1);
+		bank.m_x2 = (m_x1 * mult.m_x2) + (m_x2 * mult.m_y2) + (m_x3 * mult.m_z2);
+		bank.m_x3 = (m_x1 * mult.m_x3) + (m_x2 * mult.m_y3) + (m_x3 * mult.m_z3);
+
+		bank.m_y1 = (m_y1 * mult.m_x1) + (m_y2 * mult.m_y1) + (m_y3 * mult.m_z1);
+		bank.m_y2 = (m_y1 * mult.m_x2) + (m_y2 * mult.m_y2) + (m_y3 * mult.m_z2);
+		bank.m_y3 = (m_y1 * mult.m_x3) + (m_y2 * mult.m_y3) + (m_y3 * mult.m_z3);
+
+		bank.m_z1 = (m_z1 * mult.m_x1) + (m_z2 * mult.m_z1) + (m_z3 * mult.m_z1);
+		bank.m_z2 = (m_z1 * mult.m_z2) + (m_z2 * mult.m_z2) + (m_z3 * mult.m_z2);
+		bank.m_z3 = (m_z1 * mult.m_z3) + (m_z2 * mult.m_z3) + (m_z3 * mult.m_z3);
+	}
 	
 private:
 	float m_x1;
@@ -273,10 +320,6 @@ private:
 	float m_x3;
 
 	float m_y1;
-	float m_y2;
-	float m_y3;
-
-	float m_z1;
 	float m_y2;
 	float m_y3;
 
@@ -289,7 +332,53 @@ class Matrix4
 {
 public:
 	Matrix4() {}
-	Matrix4(float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4, float z1, float z2, float z3, float z4, float w1, float w2, float w3, float w4);
+	Matrix4(float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4, float z1, float z2, float z3, float z4, float w1, float w2, float w3, float w4)
+	{
+		m_x1 =x1;
+		m_x2 =x2;
+		m_x3 = x3;
+		m_x4 = x4;
+
+		m_y1 = y1;
+		m_y2 = y2;
+		m_y3 = y3;
+		m_y4 = y4;
+
+		m_z1 = z1;
+		m_z2 = z2;
+		m_z3 = z3;
+		m_z4 = z4;
+
+		m_w1 = w1;
+		m_w2 = w2;
+		m_w3 = w3;
+		m_w4 = w4;
+	}
+
+	Matrix4 operator *(const Matrix4& mult) const
+	{
+		Matrix4 bus;
+
+		bus.m_x1 = (m_x1 * mult.m_x1) + (m_x2 * mult.m_y1) + (m_x3 * mult.m_z1) + (m_x4 * mult.m_w1);
+		bus.m_x2 = (m_x1 * mult.m_x2) + (m_x2 * mult.m_y2) + (m_x3 * mult.m_z2) + (m_x4 * mult.m_w2);
+		bus.m_x3 = (m_x1 * mult.m_x3) + (m_x2 * mult.m_y3) + (m_x3 * mult.m_z3) + (m_x4 * mult.m_w3);
+		bus.m_x4 = (m_x1 * mult.m_x4) + (m_x2 * mult.m_y4) + (m_x3 * mult.m_z4) + (m_x4 * mult.m_w4);
+
+		bus.m_y1 = (m_y1 * mult.m_x1) + (m_y2 * mult.m_y1) + (m_y3 * mult.m_z1) + (m_y4 * mult.m_w1);
+		bus.m_y2 = (m_y1 * mult.m_x2) + (m_y2 * mult.m_y2) + (m_y3 * mult.m_z2) + (m_y4 * mult.m_w2);
+		bus.m_y3 = (m_y1 * mult.m_x3) + (m_y2 * mult.m_y3) + (m_y3 * mult.m_z3) + (m_y4 * mult.m_w3);
+		bus.m_y4 = (m_y1 * mult.m_x4) + (m_y2 * mult.m_y4) + (m_y4 * mult.m_z4) + (m_y4 * mult.m_w4);
+
+		bus.m_z1 = (m_z1 * mult.m_x1) + (m_z2 * mult.m_z1) + (m_z3 * mult.m_z1) + (m_z4 * mult.m_w1);
+		bus.m_z2 = (m_z1 * mult.m_z2) + (m_z2 * mult.m_z2) + (m_z3 * mult.m_z2) + (m_z4 * mult.m_w2);
+		bus.m_z3 = (m_z1 * mult.m_z3) + (m_z2 * mult.m_z3) + (m_z3 * mult.m_z3) + (m_z4 * mult.m_w3);
+		bus.m_z4 = (m_z1 * mult.m_z4) + (m_z2 * mult.m_z4) + (m_z4 * mult.m_z4) + (m_z4 * mult.m_w4);
+
+		bus.m_w1 = (m_w1 * mult.m_w1) + (m_w2 * mult.m_w1) + (m_w3 * mult.m_w1) + (m_z4 * mult.m_w1);
+		bus.m_w2 = (m_w1 * mult.m_w2) + (m_w2 * mult.m_w2) + (m_w3 * mult.m_w2) + (m_z4 * mult.m_w2);
+		bus.m_w3 = (m_w1 * mult.m_w3) + (m_w2 * mult.m_w3) + (m_w3 * mult.m_w3) + (m_z4 * mult.m_w3);
+		bus.m_w4 = (m_w1 * mult.m_w4) + (m_w2 * mult.m_w4) + (m_w3 * mult.m_w4) + (m_z4 * mult.m_w4);
+	}
 
 private:
 	float m_x1;
@@ -303,12 +392,12 @@ private:
 	float m_y4;
 
 	float m_z1;
-	float m_y2;
-	float m_y3;
-	float m_y4;
-
-	float m_z1;
 	float m_z2;
 	float m_z3;
 	float m_z4;
+
+	float m_w1;
+	float m_w2;
+	float m_w3;
+	float m_w4;
 };
